@@ -3,6 +3,7 @@
 # Start with naming your workflow
 name: Hello
 
+#when the workfloe runs
 on:
   push: 
 
@@ -16,3 +17,9 @@ jobs:
     steps:
       - name: Say hello
         run: echo "Hello Dosto"
+
+  repo-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Repository Name
+        run: echo "The Repo Name is ${{ github.event.repository.name }}"
