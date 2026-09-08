@@ -5,7 +5,11 @@ name: Hello
 
 #when the workfloe runs
 on:
-  push: 
+  push:
+    paths-ignore:
+      - 'README.md'
+
+    
 
 #what the workflow does
 jobs:
