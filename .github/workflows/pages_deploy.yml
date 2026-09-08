@@ -1,0 +1,44 @@
+#Goal: to deploy the index.html page to GithubPages(Service by github that runs static website)
+name: Deploy Static Site
+
+# When does this workflow run
+on:
+  #push:
+  #  branches: [main]
+  # You control and deploy by a button
+  workflow_dispatch:  
+
+# required permissions for the workflow
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Setup GitHub Pages Configuration
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: '.' # Location of your static files
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
