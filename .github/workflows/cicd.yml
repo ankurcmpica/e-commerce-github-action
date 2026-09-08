@@ -1,0 +1,34 @@
+#Goal: To build a CI/CD pipeline(just dummy)
+name: CICD Demo
+
+on:
+  push:
+
+jobs:
+#CI
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the code
+        run: echo "Code Clone"
+        
+  build:
+    needs: code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build the code with docker
+        run: echo "Code Build"
+        
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test the Application
+        run: echo "Test Passed"
+  #CD      
+  deploy:
+    needs: [code,build,test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy the App on Server
+        run: echo "Application Deployed"
