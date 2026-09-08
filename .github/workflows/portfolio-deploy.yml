@@ -3,8 +3,8 @@ name: Deploy Static Site
 
 # When does this workflow run
 on:
-  #push:
-  #  branches: [main]
+  push:
+    branches: [main]
   # You control and deploy by a button
   workflow_dispatch:  
 
